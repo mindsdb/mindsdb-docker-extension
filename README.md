@@ -62,6 +62,7 @@ Assuming your app runs on the default port, start your UI app and then run:
 ```shell
   cd ui
   npm install
+  npm run build:css
   npm run dev
 ```
 
