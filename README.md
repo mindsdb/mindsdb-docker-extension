@@ -1,63 +1,36 @@
-[![Join our Forum](https://img.shields.io/badge/-Join%20our%20Forum-blue)](https://forums.docker.com/c/docker-extensions/62)
-![stars](https://img.shields.io/github/stars/collabnix/mindsdb-docker-extension)
-![forks](https://img.shields.io/github/forks/collabnix/mindsdb-docker-extension)
-![Discord](https://img.shields.io/discord/1020180904129335379)
-![Twitter](https://img.shields.io/twitter/follow/collabnix?style=social)
-
-
-
-# Mindsdb Docker Extension
+# MindsDB Docker Desktop Extension
 
 <img width="1458" alt="image" src="https://user-images.githubusercontent.com/34368930/230012152-c60bc8a8-3c00-48c9-961c-6d10421e7e26.png">
 
+This is the Docker Desktop Extension for MindsDB. It allows you to use MindsDB within Docker Desktop.
 
-This repository defines an example of a Docker extension. The files in this repository have been automatically generated as a result of running `docker extension init`.
+## Local Development
 
-This extension is composed of:
+The extension is built using the Docker Desktop Extension SDK. To build and install the extension locally, you need to have Docker Desktop installed. 
 
-- A [frontend](./ui) app in React that makes a request to the `/hello` endpoint and displays the payload in Docker Desktop.
-- A [backend](./backend) container that runs an API in Go. It exposes the `/hello` endpoint which returns a JSON payload.
-
-> You can build your Docker Extension using your fav tech stack:
->
-> - Frontend: React, Angular, Vue, Svelte, etc.
->   Basically, any frontend framework you can bundle in an `index.html` file with CSS, and JS assets.
-> - Backend (optional): anything that can run in a container.
-
-<details>
-  <summary>Looking for more templates?</summary>
-
-1. [React + NodeJS](https://github.com/benja-M-1/node-backend-extension).
-2. [React + .NET 6 WebAPI](https://github.com/felipecruz91/dotnet-api-docker-extension).
-
-Request one or submit yours [here](https://github.com/docker/extensions-sdk/issues).
-
-</details>
-
-## Local development
-
-You can use `docker` to build, install and push your extension. Also, we provide an opinionated [Makefile](Makefile) that could be convenient for you. There isn't a strong preference of using one over the other, so just use the one you're most comfortable with.
+The following commands can be used to get the extension running locally.
 
 To build the extension, use `make build-extension` **or**:
 
 ```shell
-  docker buildx build -t ajeetraina/mindsdb-docker-extension:1.0.2 . --load
+  docker buildx build -t mindsdb/mindsdb-docker-extension:latest . --load
 ```
 
 To install the extension, use `make install-extension` **or**:
 
 ```shell
-  docker extension install ajeetraina/mindsdb-docker-extension:latest
+  docker extension install mindsdb/mindsdb-docker-extension:latest
 ```
 
 > If you want to automate this command, use the `-f` or `--force` flag to accept the warning message.
 
 To preview the extension in Docker Desktop, open Docker Dashboard once the installation is complete. The left-hand menu displays a new tab with the name of your extension. You can also use `docker extension ls` to see that the extension has been installed successfully.
 
-### Frontend development
+### Frontend Development
 
-During the development of the frontend part, it's helpful to use hot reloading to test your changes without rebuilding your entire extension. To do this, you can configure Docker Desktop to load your UI from a development server.
-Assuming your app runs on the default port, start your UI app and then run:
+During the development of the frontend for the extension, it's helpful to use hot reloading to test changes without rebuilding the entire extension. To do this, Docker Desktop can be configured to use a local development server as the source for the frontend.
+
+To start the development server, run the following commands:
 
 ```shell
   cd ui
@@ -68,39 +41,30 @@ Assuming your app runs on the default port, start your UI app and then run:
 
 This starts a development server that listens on port `3000`.
 
-You can now tell Docker Desktop to use this as the frontend source. In another terminal run:
+Docker Desktop can now be configured to use this as the frontend source. In another terminal run:
 
 ```shell
-  docker extension dev ui-source ajeetraina/mindsdb-docker-extension:latest http://localhost:3000
+  docker extension dev ui-source mindsdb/mindsdb-docker-extension:latest http://localhost:3000
 ```
 
-In order to open the Chrome Dev Tools for your extension when you click on the extension tab, run:
+In order to open the Chrome Dev Tools for the extension when the extension tab is clicked, run:
 
 ```shell
-  docker extension dev debug ajeetraina/mindsdb-docker-extension:latest
+  docker extension dev debug mindsdb/mindsdb-docker-extension:latest
 ```
 
 Each subsequent click on the extension tab will also open Chrome Dev Tools. To stop this behaviour, run:
 
 ```shell
-  docker extension dev reset ajeetraina/mindsdb-docker-extension:latest
+  docker extension dev reset mindsdb/mindsdb-docker-extension:latest
 ```
 
-### Backend development (optional)
-
-This extension does not have a backend, however, it is possible to deploy one in another container.
+> **Note:** This extension does not consist of a backend, rather it brings up the latest MindsDB container, which the front-end interacts with.
 
 ### Clean up
 
 To remove the extension:
 
 ```shell
-docker extension rm ajeetraina/mindsdb-docker-extension:latest
+docker extension rm mindsdb/mindsdb-docker-extension:latest
 ```
-
-## What's next?
-
-- To learn more about how to build your extension refer to the Extension SDK docs at https://docs.docker.com/desktop/extensions-sdk/.
-- To publish your extension in the Marketplace visit https://www.docker.com/products/extensions/submissions/.
-- To report issues and feedback visit https://github.com/docker/extensions-sdk/issues.
-- To look for other ideas of new extensions, or propose new ideas of extensions you would like to see, visit https://github.com/docker/extension-ideas/discussions.
