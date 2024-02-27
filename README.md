@@ -62,6 +62,7 @@ Assuming your app runs on the default port, start your UI app and then run:
 ```shell
   cd ui
   npm install
+  npm run build:css
   npm run dev
 ```
 
@@ -87,20 +88,7 @@ Each subsequent click on the extension tab will also open Chrome Dev Tools. To s
 
 ### Backend development (optional)
 
-This example defines an API in Go that is deployed as a backend container when the extension is installed. This backend could be implemented in any language, as it runs inside a container. The extension frameworks provides connectivity from the extension UI to a socket that the backend has to connect to on the server side.
-
-Note that an extension doesn't necessarily need a backend container, but in this example we include one for teaching purposes.
-
-Whenever you make changes in the [backend](./backend) source code, you will need to compile them and re-deploy a new version of your backend container.
-Use the `docker extension update` command to remove and re-install the extension automatically:
-
-```shell
-docker extension update ajeetraina/mindsdb-docker-extension:latest
-```
-
-> If you want to automate this command, use the `-f` or `--force` flag to accept the warning message.
-
-> Extension containers are hidden from the Docker Dashboard by default. You can change this in Settings > Extensions > Show Docker Extensions system containers.
+This extension does not have a backend, however, it is possible to deploy one in another container.
 
 ### Clean up
 

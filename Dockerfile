@@ -17,4 +17,5 @@ COPY mindsdb.svg .
 COPY ui ui
 
 WORKDIR /ui
+RUN npm install
 RUN npm run build:css
