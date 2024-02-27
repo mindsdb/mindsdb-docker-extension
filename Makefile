@@ -1,4 +1,4 @@
-IMAGE?=ajeetraina/mindsdb-docker-extension
+IMAGE?=mindsdb/mindsdb-docker-extension
 TAG?=1.0.0
 
 BUILDER=buildx-multi-arch
