@@ -1,6 +1,6 @@
 # MindsDB Docker Desktop Extension
 
-<img width="1458" alt="image" src="https://user-images.githubusercontent.com/34368930/230012152-c60bc8a8-3c00-48c9-961c-6d10421e7e26.png">
+<img width="1458" alt="image" src="mindsdb_screenshot.png">
 
 This is the Docker Desktop Extension for MindsDB. It allows you to use MindsDB within Docker Desktop.
 
