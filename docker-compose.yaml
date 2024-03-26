@@ -1,12 +1,16 @@
 services:
   mindsdb:
     image: mindsdb/mindsdb:latest
-    ports:
-      - "47334:47334"
-      - "8080:8080"
     volumes:
       - data:/opt/mindsdb/data
       - config:/opt/mindsdb/config
+
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf.d
+    ports:
+      - "80:80"
 
 volumes:
   data:
