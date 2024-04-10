@@ -13,7 +13,7 @@ LABEL org.opencontainers.image.title="MindsDB" \
 
 COPY docker-compose.yaml .
 COPY metadata.json .
-COPY mindsdb.svg .
+COPY assets/mindsdb.svg .
 COPY ui ui
 
 WORKDIR /ui
