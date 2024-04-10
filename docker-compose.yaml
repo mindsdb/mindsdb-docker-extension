@@ -3,10 +3,11 @@ services:
     image: mindsdb/mindsdb:latest
     ports:
       - "47334:47334"
-      - "8080:8080"
+      - "47335:47335"
     volumes:
       - data:/opt/mindsdb/data
       - config:/opt/mindsdb/config
+    container_name: mindsdb
 
 volumes:
   data:
