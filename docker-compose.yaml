@@ -8,6 +8,7 @@ services:
       - data:/opt/mindsdb/data
       - config:/opt/mindsdb/config
     container_name: mindsdb
+    pull_policy: always
 
 volumes:
   data:
