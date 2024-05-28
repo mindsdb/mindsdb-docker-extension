@@ -15,7 +15,3 @@ COPY docker-compose.yaml .
 COPY metadata.json .
 COPY assets/mindsdb.svg .
 COPY ui ui
-
-WORKDIR /ui
-RUN npm install
-RUN npm run build:css
