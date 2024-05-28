@@ -7,7 +7,7 @@ export function App() {
         if (!response.ok) {
           throw new Error("Server not ready");
         }
-        window.location.href = "http://localhost:47334";
+        window.location.href = "http://localhost:47334/editor";
       })
       .catch((error) => {
         // Server not ready yet. Wait for 2 seconds and try again
@@ -22,7 +22,7 @@ export function App() {
   return (
     <div className="relative flex w-full content-center min-h-screen flex-col justify-center overflow-hidden bg-gray-50 py-6 sm:py-12 items-center">
       <svg
-        class="animate-pulse"
+        className="animate-pulse"
         width="94"
         height="52"
         viewBox="0 0 94 52"
@@ -42,8 +42,8 @@ export function App() {
           fill="#00A587"
         />
       </svg>
-      <p class="mt-6 text-zinc-800">Hang tight! MindsDB is starting..</p>
-      <p class="mt-4 text-zinc-600 font-light">
+      <p className="mt-6 text-zinc-800">Hang tight! MindsDB is starting..</p>
+      <p className="mt-4 text-zinc-600 font-light">
         Connect a new database or app, or add a model.
       </p>
     </div>
