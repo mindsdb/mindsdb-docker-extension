@@ -34,7 +34,7 @@ export function App() {
   }, []);
 
   return (
-    <div className="relative flex w-full content-center min-h-screen flex-col justify-center overflow-hidden bg-gray-50 py-6 sm:py-12 items-center">
+    <div className="font-sans relative flex w-full content-center min-h-screen flex-col justify-center overflow-hidden bg-gray-50 py-6 sm:py-12 items-center">
       <svg
         className="animate-pulse"
         width="94"
