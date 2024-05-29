@@ -1,6 +1,20 @@
 import { useEffect } from "react";
 
+/**
+ * App component
+ * This component will render the loading screen while MindsDB server is starting
+ * It will continuously check if MindsDB server is ready to serve requests
+ * Once the server is ready, it will redirect to the MindsDB editor
+ * @returns JSX.Element
+ */
+
 export function App() {
+  /**
+   * Function to check if MindsDB server is ready
+   * If the server is ready, it will redirect to the MindsDB editor
+   * If the server is not ready, it will wait for 2 seconds and try again
+   * @returns void
+   */
   const checkMindsDBServer = () => {
     fetch("http://localhost:47334")
       .then((response) => {
