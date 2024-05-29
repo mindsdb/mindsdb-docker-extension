@@ -16,7 +16,7 @@ export function App() {
    * @returns void
    */
   const checkMindsDBServer = () => {
-    fetch("http://localhost:47334")
+    fetch("http://localhost:47334/editor")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Server not ready");
