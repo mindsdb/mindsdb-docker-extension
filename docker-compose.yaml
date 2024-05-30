@@ -4,6 +4,7 @@ services:
     ports:
       - "47334:47334"
       - "47335:47335"
+      - "47336:47336"
     volumes:
       - data:/opt/mindsdb/data
       - config:/opt/mindsdb/config
