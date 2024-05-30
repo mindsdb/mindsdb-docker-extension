@@ -6,7 +6,7 @@ This is the Docker Desktop Extension for MindsDB. It allows you to use MindsDB w
 
 ## Local Development
 
-The extension is built using the Docker Desktop Extension SDK. To build and install the extension locally, you need to have Docker Desktop installed. 
+The extension is built using the Docker Desktop Extension SDK. To build and install the extension locally, you need to have Docker Desktop installed.
 
 The following commands can be used to get the extension running locally.
 
@@ -35,7 +35,6 @@ To start the development server, run the following commands:
 ```shell
   cd ui
   npm install
-  npm run build:css
   npm run dev
 ```
 
