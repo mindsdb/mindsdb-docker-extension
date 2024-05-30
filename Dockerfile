@@ -10,7 +10,7 @@ RUN --mount=type=cache,target=/usr/src/app/.npm \
 COPY ui /ui
 RUN npm run build
 
-FROM node:18-alpine
+FROM alpine
 LABEL org.opencontainers.image.title="MindsDB" \
     org.opencontainers.image.description="Streamline AI development with MindsDB in your Docker environment. Deploy, manage, and scale your AI models seamlessly." \
     org.opencontainers.image.vendor="MindsDB" \
