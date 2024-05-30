@@ -15,7 +15,6 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "build:css": "npx tailwindcss -i index.css -o output.css",
     "test": "jest src"
   },
   "devDependencies": {
