@@ -1,0 +1,64 @@
+name: Bump MindsDB Version and Push Extension
+
+on:
+  repository_dispatch:
+    types: [completed]
+
+jobs:
+  bump-version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Debug event
+        run: echo ${{ toJson(github.event) }} # Output the entire event payload for debugging
+
+      - name: Set up Git
+        run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+
+      - name: Create new branch
+        run: |
+          git checkout -b mindsdb-version-update-${{ github.event.client_payload.version }}
+
+      - name: Update extension version
+        run: |
+          # Read current extension version
+          current_extension_version=$(cat VERSION)
+
+          # Increment extension version (increment the last number by 1)
+          new_extension_version=$(echo $current_version | awk -F. '{$NF = $NF + 1;} 1' | sed 's/ /./g')
+
+          # Update VERSION file with new version
+          echo $new_extension_version > VERSION
+
+          # Commit changes
+          git add VERSION
+          git commit -m "Update extension version to $new_extension_version"
+
+      - name: Update MindsDB version
+        run: |
+          # Update MindsDB version
+          sed -i 's|mindsdb/mindsdb:v[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*|mindsdb/mindsdb:v${{ github.event.client_payload.version }}|' docker-compose.yml
+
+          # Commit changes
+          git add docker-compose.yml
+          git commit -m "Update MindsDB version to ${{ github.event.client_payload.version }}"
+
+      - name: Push changes
+        run: git push origin mindsdb-version-update-${{ github.event.client_payload.version }}
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "Bump MindsDB version to ${{ github.event.client_payload.version }}"
+          title: "Bump MindsDB version to ${{ github.event.client_payload.version }}"
+          body: "Bump MindsDB version to ${{ github.event.client_payload.version }}"
+          branch: mindsdb-version-update-${{ github.event.client_payload.version }}
+          base: main
+          labels: "automated-pr"
+          reviewers: "MinuraPunchihewa,ZoranPandovski"
+          draft: false
