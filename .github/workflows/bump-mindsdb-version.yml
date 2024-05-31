@@ -4,11 +4,11 @@ on:
   repository_dispatch:
     types: [completed]
 
-    workflow_dispatch:
-      inputs:
-        version:
-          description: "Version to bump to"
-          required: true
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version to bump to"
+        required: true
 
 jobs:
   bump-version:
@@ -35,7 +35,7 @@ jobs:
           current_extension_version=$(cat VERSION)
 
           # Increment extension version (increment the last number by 1)
-          new_extension_version=$(echo $current_version | awk -F. '{$NF = $NF + 1;} 1' | sed 's/ /./g')
+          new_extension_version=$(echo $current_extension_version | awk -F. '{$NF = $NF + 1;} 1' | sed 's/ /./g')
 
           # Update VERSION file with new version
           echo $new_extension_version > VERSION
