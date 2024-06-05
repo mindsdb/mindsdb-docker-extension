@@ -4,12 +4,6 @@ on:
   repository_dispatch:
     types: [completed]
 
-  workflow_dispatch:
-    inputs:
-      version:
-        description: "Version to bump to"
-        required: true
-
 jobs:
   bump-version:
     runs-on: ubuntu-latest
