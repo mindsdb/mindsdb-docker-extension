@@ -41,10 +41,10 @@ jobs:
       - name: Update MindsDB version
         run: |
           # Update MindsDB version
-          sed -i 's|mindsdb/mindsdb:v[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*|mindsdb/mindsdb:v${{ github.event.client_payload.version }}|' docker-compose.yml
+          sed -i 's|mindsdb/mindsdb:v[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*|mindsdb/mindsdb:v${{ github.event.client_payload.version }}|' docker-compose.yaml
 
           # Commit changes
-          git add docker-compose.yml
+          git add docker-compose.yaml
           git commit -m "Update MindsDB version to ${{ github.event.client_payload.version }}"
 
       - name: Push changes
@@ -56,7 +56,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: "Bump MindsDB version to ${{ github.event.client_payload.version }}"
           title: "Bump MindsDB version to ${{ github.event.client_payload.version }}"
-          body: "Bump MindsDB version to ${{ github.event.client_payload.version }}"
+          body: "This is an automated PR that bumps the version of the MindsDB image to ${{ github.event.client_payload.version }} in response to the latest release that has been made."
           branch: mindsdb-version-update-${{ github.event.client_payload.version }}
           base: main
           labels: "automated-pr"
