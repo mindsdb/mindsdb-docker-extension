@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Debug event
-        run: echo ${{ toJson(github.event) }} # Output the entire event payload for debugging
+        run: echo "${{ toJson(github.event) }}"
 
       - name: Set up Git
         run: |
