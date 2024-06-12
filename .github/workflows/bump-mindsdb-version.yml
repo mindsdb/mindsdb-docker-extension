@@ -1,7 +1,7 @@
 name: Bump MindsDB Version and Push Extension
 
 on:
-  repository_dispatch:
+  workflow_dispatch:
     types: [completed]
 
 permissions:
