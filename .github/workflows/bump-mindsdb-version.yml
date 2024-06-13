@@ -1,7 +1,10 @@
 name: Bump MindsDB Version and Push Extension
 
 on:
-  workflow_dispatch
+  workflow_dispatch:
+    inputs:
+      image-tag:
+        required: true
 
 permissions:
   contents: write
@@ -40,19 +43,19 @@ jobs:
       - name: Update MindsDB version
         run: |
           # Update MindsDB version
-          sed -i 's|mindsdb/mindsdb:v[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*|mindsdb/mindsdb:v${{ github.event.client_payload.version }}|' docker-compose.yaml
+          sed -i 's|mindsdb/mindsdb:v[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*|mindsdb/mindsdb:v${{ github.event.inputs.image-tag }}|' docker-compose.yaml
 
           # Commit changes
           git add docker-compose.yaml
-          git commit -m "Update MindsDB version to ${{ github.event.client_payload.version }}"
+          git commit -m "Update MindsDB version to ${{ github.event.inputs.image-tag }}"
 
       - name: Create pull request
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          title: "Bump MindsDB version to ${{ github.event.client_payload.version }}"
-          body: "This is an automated PR that bumps the version of the MindsDB image to ${{ github.event.client_payload.version }} in response to the latest release that has been made."
-          branch: release/mindsdb-version-update-${{ github.event.client_payload.version }}
+          title: "Bump MindsDB version to ${{ github.event.inputs.image-tag }}"
+          body: "This is an automated PR that bumps the version of the MindsDB image to ${{ github.event.inputs.image-tag }} in response to the latest release that has been made."
+          branch: release/mindsdb-version-update-${{ github.event.inputs.image-tag }}
           base: main
           labels: "automated-pr"
           reviewers: "MinuraPunchihewa,ZoranPandovski"
