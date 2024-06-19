@@ -43,7 +43,7 @@ jobs:
       - name: Update MindsDB version
         run: |
           # Update MindsDB version
-          sed -i 's|mindsdb/mindsdb:v[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*|mindsdb/mindsdb:v${{ github.event.inputs.image-tag }}|' docker-compose.yaml
+          sed -i 's|mindsdb/mindsdb:v[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*|mindsdb/mindsdb:${{ github.event.inputs.image-tag }}|' docker-compose.yaml
 
           # Commit changes
           git add docker-compose.yaml
