@@ -1,6 +1,6 @@
 services:
   mindsdb:
-    image: mindsdb/mindsdb:v24.7.2.0
+    image: mindsdb/mindsdb:v24.7.3.0
     ports:
       - "47334:47334"
       - "47335:47335"
