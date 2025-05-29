@@ -5,6 +5,8 @@ services:
       - "47334:47334"
       - "47335:47335"
       - "47336:47336"
+      - "47337:47337"
+      - "47338:47338"
     volumes:
       - data:/opt/mindsdb/data
       - config:/opt/mindsdb/config
