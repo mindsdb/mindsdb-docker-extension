@@ -7,6 +7,9 @@ services:
       - "47336:47336"
       - "47337:47337"
       - "47338:47338"
+    environment:
+      MINDSDB_A2A_HOST: "0.0.0.0"   # Force A2A to bind to all interfaces
+      MINDSDB_A2A_PORT: "47338"     # Force A2A to use port 47338
     volumes:
       - data:/opt/mindsdb/data
       - config:/opt/mindsdb/config
