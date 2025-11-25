@@ -24,7 +24,6 @@ LABEL org.opencontainers.image.title="MindsDB" \
     com.docker.extension.changelog="https://raw.githubusercontent.com/mindsdb/mindsdb-docker-extension/main/CHANGELOG.md"
 
 COPY docker-compose.yaml .
-COPY init-dbs.sh .
 COPY metadata.json .
 COPY assets/mindsdb.svg .
 COPY --from=client-builder /ui/build ui
