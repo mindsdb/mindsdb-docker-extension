@@ -20,7 +20,7 @@ services:
     image: mindsdb/mindsdb-docker-extension-pgvector:latest
     container_name: pgvector_service
     volumes:
-      - pg_data:/var/lib/postgresql/data
+      - data_pg:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: "postgres"
       POSTGRES_PASSWORD: "postgres"
@@ -34,4 +34,4 @@ services:
 volumes:
   data:
   config:
-  pg_data:
+  data_pg:
