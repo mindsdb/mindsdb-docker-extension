@@ -1,0 +1,5 @@
+FROM pgvector/pgvector:pg17
+
+COPY init-dbs.sh /docker-entrypoint-initdb.d/init-dbs.sh
+RUN chmod +x /docker-entrypoint-initdb.d/init-dbs.sh
+
