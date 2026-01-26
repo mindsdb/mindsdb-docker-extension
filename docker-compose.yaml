@@ -4,15 +4,31 @@ services:
     ports:
       - "47334:47334"
       - "47335:47335"
-      - "47336:47336"
-      - "47337:47337"
-      - "47338:47338"
     volumes:
       - data:/opt/mindsdb/data
       - config:/opt/mindsdb/config
     container_name: mindsdb_service
     pull_policy: always
+    environment:
+      MINDSDB_DB_CON: "postgresql://mindsdb:mindsdb@pgvector/mindsdb"
+      KB_PGVECTOR_URL: "postgresql://mindsdb:mindsdb@pgvector/kb"
+
+  pgvector:
+    image: mindsdb/mindsdb-docker-extension-pgvector:latest
+    container_name: pgvector_service
+    volumes:
+      - data_pg:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_DB: "postgres"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
 
 volumes:
   data:
   config:
+  data_pg:

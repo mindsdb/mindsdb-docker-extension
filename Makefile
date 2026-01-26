@@ -1,11 +1,15 @@
 IMAGE?=mindsdb/mindsdb-docker-extension
+PGVECTOR_IMAGE?=mindsdb/mindsdb-docker-extension-pgvector
 
 BUILDER=buildx-multi-arch
 
 INFO_COLOR = \033[0;36m
 NO_COLOR   = \033[m
 
-build-extension: ## Build service image to be deployed as a desktop extension
+build-pgvector: ## Build the pgvector image with init scripts
+	docker build --tag=$(PGVECTOR_IMAGE):latest -f Dockerfile.pgvector .
+
+build-extension: build-pgvector ## Build service image to be deployed as a desktop extension
 	docker build --tag=$(IMAGE):$(TAG) .
 
 install-extension: build-extension ## Install the extension
@@ -20,7 +24,10 @@ prepare-buildx: ## Create buildx builder for multi-arch build, if not exists
 validate-extension: ## Validate extension is ready to be published
 	docker extension validate mindsdb/mindsdb-docker-extension:1.0.0
 
-push-extension: prepare-buildx ## Build & Upload extension image to hub. Do not push if tag already exists: make push-extension tag=0.1
+push-pgvector: prepare-buildx ## Build & Upload pgvector image to hub
+	docker buildx build --push --builder=$(BUILDER) --platform=linux/amd64,linux/arm64 --tag=$(PGVECTOR_IMAGE):latest -f Dockerfile.pgvector .
+
+push-extension: prepare-buildx push-pgvector ## Build & Upload extension image to hub. Do not push if tag already exists: make push-extension tag=0.1
 	docker pull $(IMAGE):$(TAG) && echo "Failure: Tag already exists" || docker buildx build --push --builder=$(BUILDER) --platform=linux/amd64,linux/arm64 --build-arg TAG=$(TAG) --tag=$(IMAGE):$(TAG) .
 
 help: ## Show this help
